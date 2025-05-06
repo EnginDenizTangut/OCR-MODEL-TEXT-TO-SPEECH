@@ -3,10 +3,10 @@ import cv2
 import pytesseract
 import numpy as np
 from pytesseract import Output
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 import pyttsx3
-import gradio as gr
 
+
+pytesseract.pytesseract.tesseract_cmd = r'tesseract.exe path'
 img = cv2.imread("testocr.png")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #gri tonlama
 img = cv2.medianBlur(img,3) #denoised kucuk leke temizleme
