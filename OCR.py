@@ -8,9 +8,9 @@ import pyttsx3
 
 pytesseract.pytesseract.tesseract_cmd = r'tesseract.exe path'
 img = cv2.imread("testocr.png")
-img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #gri tonlama
-img = cv2.medianBlur(img,3) #denoised kucuk leke temizleme
-thresh = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,31,10) #heterojen aydinlatma durumlarinin onune gecmek icin
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img = cv2.medianBlur(img,3)
+thresh = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,31,10)
 kernel= np.ones((2,2),np.uint8)
 img = cv2.morphologyEx(thresh,cv2.MORPH_CLOSE,kernel)
 img = cv2.GaussianBlur(img, (5, 5), 0)
@@ -56,7 +56,7 @@ cv2.imshow('Binary Image', img)
 
 ocr_data = pytesseract.image_to_data(img,output_type=Output.DICT)
 
-n_boxes = len(ocr_data['text']) #kac kelime var
+n_boxes = len(ocr_data['text'])
 for i in range(n_boxes):
     if int(ocr_data['conf'][i]) > 60:
         (x,y,w,h) = (ocr_data["left"][i],ocr_data['top'][i],
